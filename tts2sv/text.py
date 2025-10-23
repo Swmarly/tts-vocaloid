@@ -46,30 +46,26 @@ class TextSyllabifier:
         return self._fallback_syllables(word)
 
     def _fallback_syllables(self, word: str) -> List[str]:
-        matches = list(VOWEL_GROUP_RE.finditer(word))
-        if not matches:
+        syllables = re.findall(
+            r"[^aeiouy]*[aeiouy]+(?:[^aeiouy](?=[^aeiouy]|$))?",
+            word,
+            flags=re.IGNORECASE,
+        )
+        if not syllables:
             return [word]
-        parts: List[str] = []
-        last_idx = 0
-        for idx, match in enumerate(matches):
-            start = last_idx
-            end = match.end()
-            if idx < len(matches) - 1:
-                next_start = matches[idx + 1].start()
-                end = max(end, next_start)
-            else:
-                end = len(word)
-            parts.append(word[start:end])
-            last_idx = end
-        if last_idx < len(word):
-            parts[-1] = parts[-1] + word[last_idx:]
-        return parts
+        consumed = sum(len(part) for part in syllables)
+        if consumed < len(word):
+            syllables[-1] = syllables[-1] + word[consumed:]
+        return syllables
 
     def _hyphenate(self, word: str) -> str | None:
         dictionary = get_pyphen_dict(self.lang)
         if dictionary is None:
             return None
-        return dictionary.inserted(word)
+        hyphenated = dictionary.inserted(word)
+        if hyphenated == word:
+            return None
+        return hyphenated
 
 
 @lru_cache(maxsize=None)
