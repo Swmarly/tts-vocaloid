@@ -1,4 +1,15 @@
-tts2sv/examples/hello.wav
-__pycache__/
+# Python
 .venv/
+__pycache__/
 *.pyc
+
+# Electron / Node
+node_modules/
+electron-app/node_modules/
+.electron-cache/
+
+# macOS
+.DS_Store
+
+# VSCode
+.vscode/

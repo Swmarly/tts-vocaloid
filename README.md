@@ -13,7 +13,36 @@ The tool extracts pitch from an input WAV, splits the spoken text into syllables
 
 Limitations: speech contours rarely map cleanly to musical phrasing; manual editing is still recommended.
 
-## Installation
+## Quick start
+
+### Automated setup (recommended)
+
+The repository now ships with a convenience script that prepares a Python
+virtual environment and installs the optional Electron GUI in one go:
+
+```bash
+./install.sh
+```
+
+By default the script creates a `.venv` folder in the project root. Set the
+`PYTHON` environment variable or pass an alternate directory if you prefer a
+different interpreter or virtual environment location:
+
+```bash
+PYTHON=python3.11 ./install.sh my-env
+```
+
+After the script finishes you can activate the environment with:
+
+```bash
+source my-env/bin/activate  # or .venv/bin/activate if you kept the default
+```
+
+If `npm` is detected the script also runs `npm install` inside
+`electron-app/`. Without Node.js you can still use the CLI—install Node later
+and run `npm install` in that directory to enable the GUI.
+
+### Manual installation
 
 ```bash
 python -m venv .venv
@@ -38,6 +67,21 @@ tts2sv --wav examples/hello.wav --text "Hello, world!" --out-prefix out/demo --b
 ```
 
 Outputs are written to `out/demo.musicxml`, `out/demo.mid`, and `out/demo.ust`.
+
+## Electron GUI
+
+Prefer a graphical interface? After running `./install.sh` (or manually
+executing `npm install` inside `electron-app/`) you can start the desktop app:
+
+```bash
+cd electron-app
+npm start
+```
+
+The GUI exposes all of the CLI switches, streams the command output to a log
+panel, and lets you browse for WAV files, choose an output prefix, and specify
+which Python interpreter to use. The app ultimately calls the same
+`tts2sv` command under the hood, so it retains the full feature set.
 
 ## Workflow
 
