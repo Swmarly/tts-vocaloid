@@ -1,0 +1,4 @@
+tts2sv/examples/hello.wav
+__pycache__/
+.venv/
+*.pyc
