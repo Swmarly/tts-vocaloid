@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tts2sv GUI</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>tts2sv GUI</h1>
+    <p>Convert spoken TTS WAV files into Synthesizer V / UTAU friendly formats.</p>
+  </header>
+
+  <main>
+    <form id="conversion-form">
+      <section>
+        <label for="wav-path">Input WAV</label>
+        <div class="input-group">
+          <input id="wav-path" name="wav" type="text" placeholder="Path to WAV file" required />
+          <button type="button" id="browse-wav">Browse</button>
+        </div>
+      </section>
+
+      <section>
+        <label for="text-input">Synthesised Text</label>
+        <textarea id="text-input" name="text" rows="2" placeholder="Exact text that was spoken" required></textarea>
+      </section>
+
+      <section>
+        <label for="output-prefix">Output Prefix</label>
+        <div class="input-group">
+          <input id="output-prefix" name="output" type="text" value="out/tts_line" required />
+          <button type="button" id="browse-output">Browse</button>
+        </div>
+        <small>MusicXML, MIDI, and UST files will use this prefix.</small>
+      </section>
+
+      <section class="grid">
+        <div>
+          <label for="bpm">BPM</label>
+          <input id="bpm" name="bpm" type="number" value="120" step="1" min="20" max="400" />
+        </div>
+        <div>
+          <label for="lang">Language</label>
+          <input id="lang" name="lang" type="text" value="en" />
+        </div>
+        <div>
+          <label for="min-note-beats">Min Note (beats)</label>
+          <input id="min-note-beats" name="minNoteBeats" type="number" value="0.125" step="0.001" min="0.03125" />
+        </div>
+        <div>
+          <label for="timebase">Timebase</label>
+          <input id="timebase" name="timebase" type="number" value="480" step="1" min="60" />
+        </div>
+      </section>
+
+      <section class="options">
+        <label><input type="checkbox" id="strict" /> Strict syllable/note alignment</label>
+      </section>
+
+      <section>
+        <label for="python-path">Python (optional)</label>
+        <div class="input-group">
+          <input id="python-path" type="text" placeholder="Defaults to system python" />
+          <button type="button" id="browse-python">Browse</button>
+        </div>
+        <small>Point to the Python interpreter inside your virtual environment if needed.</small>
+      </section>
+
+      <div class="actions">
+        <button type="submit" id="run-button">Run conversion</button>
+        <button type="button" id="clear-log">Clear log</button>
+      </div>
+    </form>
+
+    <section class="log-section">
+      <header>
+        <h2>Log</h2>
+      </header>
+      <pre id="log-output" aria-live="polite"></pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>Need command line access? Run <code>tts2sv --help</code> inside your virtual environment.</p>
+  </footer>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

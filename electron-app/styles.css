@@ -1,0 +1,142 @@
+:root {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #202124;
+  background-color: #f5f5f5;
+  line-height: 1.4;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header,
+footer {
+  background: #1f2933;
+  color: #f9fafb;
+  padding: 1.5rem 2rem;
+}
+
+header h1 {
+  margin: 0 0 0.3rem;
+}
+
+main {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+form section {
+  margin-bottom: 1rem;
+}
+
+label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.input-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input-group input {
+  flex: 1 1 auto;
+}
+
+button {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+#clear-log {
+  background: #6b7280;
+}
+
+#clear-log:hover:not(:disabled) {
+  background: #4b5563;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.log-section {
+  background: #111827;
+  color: #f9fafb;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.log-section h2 {
+  margin-top: 0;
+}
+
+#log-output {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-height: 280px;
+  overflow-y: auto;
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+  background: #1f2937;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+small {
+  color: #4b5563;
+}
+
+@media (max-width: 600px) {
+  main {
+    padding: 1rem;
+  }
+
+  header,
+  footer {
+    padding: 1rem;
+  }
+}
