@@ -13,3 +13,4 @@ electron-app/node_modules/
 
 # VSCode
 .vscode/
+electron-app/package-lock.json
