@@ -2,17 +2,30 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Sequence
-
-try:  # pragma: no cover
-    from music21 import instrument, meter, stream, tempo, note
-except ImportError as exc:  # pragma: no cover
-    raise ImportError("music21 is required for MusicXML export") from exc
+from typing import Any, Sequence
 
 from .utils import Note
 
+_MUSIC21_IMPORT_ERROR = "music21 is required for MusicXML export"
+_MUSIC21_MODULES: tuple[Any, ...] | None = None
 
-def build_stream(notes: Sequence[Note], bpm: float) -> stream.Stream:
+
+def _load_music21() -> tuple[Any, ...]:
+    """Lazily import music21 so optional dependency is only needed on demand."""
+
+    global _MUSIC21_MODULES
+    if _MUSIC21_MODULES is None:
+        try:  # pragma: no cover - exercised in integration
+            from music21 import instrument, meter, stream, tempo, note
+        except ImportError as exc:  # pragma: no cover
+            raise ImportError(_MUSIC21_IMPORT_ERROR) from exc
+        _MUSIC21_MODULES = (instrument, meter, stream, tempo, note)
+    return _MUSIC21_MODULES
+
+
+def build_stream(notes: Sequence[Note], bpm: float) -> Any:
+    instrument, meter, stream, tempo, note = _load_music21()
+
     part = stream.Part()
     part.insert(0, instrument.Voice())
     part.insert(0, tempo.MetronomeMark(number=bpm))
