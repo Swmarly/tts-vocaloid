@@ -24,6 +24,15 @@ pip install -e .
 
 ## Usage
 
+First, generate the bundled sine-wave example (skipping this step if you already
+have your own TTS line):
+
+```bash
+python examples/make_hello_wav.py
+```
+
+Then run the CLI:
+
 ```bash
 tts2sv --wav examples/hello.wav --text "Hello, world!" --out-prefix out/demo --bpm 120
 ```
