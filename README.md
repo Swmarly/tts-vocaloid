@@ -75,6 +75,7 @@ executing `npm install` inside `electron-app/`) you can start the desktop app:
 
 ```bash
 cd electron-app
+npm install  # first run only; ensures the bundled Electron binary is available
 npm start
 ```
 
